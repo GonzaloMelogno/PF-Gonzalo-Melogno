@@ -1,24 +1,29 @@
 import React from "react";
 import {Nav, Navbar, Container} from "react-bootstrap";
-
+import { Link } from "react-router-dom";
+import ItemListContainer from "../Productos/ItemListContainer";
+import Cart from "./Cart";
 
     function NavBar() {
       return (
         <>
           <Navbar bg="dark" data-bs-theme="dark">
             <Container>
-              <Navbar.Brand href="/">Evermeet Tienda</Navbar.Brand>
+              <Navbar.Brand  href="/">Evermeet Tienda</Navbar.Brand>
               <Nav className="me-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/Ropa">Ropa</Nav.Link>
-                <Nav.Link href="/Juegos">Juegos</Nav.Link>
-                <Nav.Link href="/Cocina">Cocina</Nav.Link>
-                <Nav.Link href="/cart">Cart</Nav.Link>
+              <Link to={"/"}><div className="navegacion">Home</div></Link>
+              <Link to={`/categoria/${"ropa"}`}> <div className="navegacion">Ropa</div> </Link> 
+              <Link to={`/categoria/${"juegos"}`}> <div className="navegacion">Juegos</div></Link>
+              <Link to={`/categoria/${"cocina"}`}> <div className="navegacion">Cocina</div></Link>
               </Nav>
             </Container>
+            <Link to={`/cart`}>  <span class="material-symbols-outlined"> shopping_cart </span> 
+            </Link> 
           </Navbar>
         </>
       );
     }
     
     export default NavBar
+
+ 

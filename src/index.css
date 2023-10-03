@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.img-bk{
+background-image: url(./Componentes/Productos/imagenes/04_Bg.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+.navegacion{
+  text-decoration: none;
+  color: white;
+  margin: 2rem;
+  size: 70px;
+}
+
+.material-symbols-outlined{
+  color: white;
+  size: 40px;
+}

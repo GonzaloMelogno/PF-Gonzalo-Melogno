@@ -8,7 +8,7 @@ import ShoppingCartContext from "./Componentes/context/ShoppingCartContext";
 
 function App() {
   return (
-    <div>
+    <div className="img-bk">
       <ShoppingCartContext>
     <BrowserRouter>
     <NavBar />

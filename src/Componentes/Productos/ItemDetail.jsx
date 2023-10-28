@@ -3,6 +3,8 @@ import { useParams} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ItemCount from './ItemCount';
 
+
+
 const ItemDetail = ({products}) => {
   const { id } = useParams();
   const [product, setProduct ] = useState([]);
@@ -16,20 +18,20 @@ const ItemDetail = ({products}) => {
     <>
       {product.map((producto) => (
         <>
-        <div className='bk-black'>
+        <div className='bk-black text-center'>
         <div key={producto.id}>
-          <div  >
+          <div className='centrar' >
             <img
               src={producto.imagen}
               alt={producto.nombre}
-              className='img-detail' />
+              className='img-detail ' />
           </div>
           <h2  className='letters'>{producto.nombre}</h2>
           <p  className='letters'>{producto.detalle}</p>
           <p className='letters'>Categoria: {producto.categoria}</p>
           <p  className='letters'>Stock: {producto.cantidad}</p>
           <p  className='letters'>Precio: $ {producto.precio}</p>
-        </div><ItemCount nombre={producto.nombre} precio={producto.precio} cantidad={producto.cantidad} id={producto.id} />
+        </div><ItemCount  nombre={producto.nombre} precio={producto.precio} cantidad={producto.cantidad} id={producto.id} />
         </div>
         </>
 

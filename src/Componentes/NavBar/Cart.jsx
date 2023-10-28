@@ -2,6 +2,7 @@ import { CartContext } from "../context/ShoppingCartContext";
 import React, { useContext, useState, useEffect } from "react";
 import Form from "./form";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -9,21 +10,42 @@ const Cart = () => {
 
   useEffect(() => {
     let newTotal = 0;
-    cart.forEach((item) => {
+    cart.forEach((item) => {if (total === 0){
       newTotal += item.precio * item.cantidad;
+    }
+    else{
+      newTotal = total + (item.precio * item.cantidad);
+    }
     }); 
     setTotal(newTotal);
   }, [cart]);
 
+   const handleDeleteAll = (id) => {
+     const newCart = cart.filter((item) => item.id !== id);
+    setCart(newCart);
+   };
   const handleDelete = (id) => {
-    const newCart = cart.filter((item) => item.id !== id);
+    const updatedCart = cart.map((item) => {
+      if (item.id === id) {
+        if (item.cantidad > 1) {
+          return { ...item, cantidad: item.cantidad - 1 };
+        } else {
+          return null;
+        }
+      } else {
+        return item;
+      }
+    });
+    const newCart = updatedCart.filter((item) => item !== null);
+  
     setCart(newCart);
   };
+  
 
   const condition = () => {
     if (cart.length) {
       return (
-        <><h2>Total: $ {total}</h2>
+        <><h2 className='letters'>Total: $ {total}</h2>
           <div>
             <Form/>
           </div>
@@ -32,13 +54,13 @@ const Cart = () => {
     } else {
       return (
         <>
-          <h1>
+          <h1 className='letters'>
             Su carro está vacio! por favor vea nuestro catálogo
           </h1>
           <Link to={"/"}>
-            <button>
+            <Button>
               inicio
-            </button>
+            </Button>
           </Link>
         </>
       );
@@ -46,28 +68,32 @@ const Cart = () => {
   };
 
   return (
-    <>
-        <h1>
+    <><div className="bk-black">
+        <h1 className='letters'>
           Carro
         </h1>
         <div>
           {cart.map((item) => {
             return (
-              <React.Fragment key={item.id}>
-                <div>
-                  <div >{item.nombre}</div>
-                  <div>cantidad:{item.cantidad}</div>
-                  <div>
+              <React.Fragment  key={item.id}>
+                <div className="bk-black">
+                  <div className='letters' >{item.nombre}</div>
+                  <div className='letters'>cantidad:{item.cantidad}</div>
+                  <div className='letters'>
                     precio: $ {item.precio * item.cantidad}
                   </div>
-                  <button onClick={() => handleDelete(item.id)}>
-                    <span>borrar</span>
-                  </button>
+                  <Button className="boton-delete" variant="danger" onClick={() => handleDelete(item.id)}>
+                    <span>borrar uno</span>
+                  </Button>
+                  <Button variant="danger" onClick={() => handleDeleteAll(item.id)}>
+                    <span>borrar todos</span>
+                  </Button>
                 </div>
               </React.Fragment>
             );
           })}
           <div>{condition()}</div>
+        </div>
         </div>
     </>
   );

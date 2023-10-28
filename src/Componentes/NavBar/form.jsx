@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { collection, getFirestore, addDoc } from "firebase/firestore";
 import { CartContext } from "../context/ShoppingCartContext";
+import { Button } from "react-bootstrap";
 
 const Form = () => {
   const [orderId, setOrderId] = useState(null);
@@ -39,19 +40,24 @@ const Form = () => {
   return (
     <>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <h2 style={{ color: 'white' }}>
+        <h2 className="w-letters">
           Complete los detalles de su orden
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <form onSubmit={handleSubmit}>
             <div>
-              <label>Nombre</label>
+              <label className="w-letters">Nombre :</label>
+              <br />
               <input type="text" onChange={(e) => setName(e.target.value)} />
-              <label>Email</label>
+              <br />
+              <label className="w-letters">Email  :</label>
+              <br />
               <input type="email" onChange={(e) => setEmail(e.target.value)} />
-              <p>Nunca compartiremos tu información</p>
+              <br />
+              <p className="w-letters">Nunca compartiremos tu información</p>
             </div>
-            <label>Comentarios?</label>
+            <label className="w-letters">Comentarios?</label>
+            <br />
             <textarea></textarea>
             <div >
               <button>
@@ -61,7 +67,7 @@ const Form = () => {
           </form>
         </div>
         
-          <h1>
+          <h1 className="w-letters">
             Order ID:
           </h1>
           <h2>{orderId}</h2>

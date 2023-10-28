@@ -12,12 +12,6 @@ code {
     monospace;
 }
 
-.img-bk{
-background-image: url(./Componentes/Productos/imagenes/04_Bg.jpg);
-background-size: cover;
-background-repeat: no-repeat;
-}
-
 .navegacion{
   text-decoration: none;
   color: white;
@@ -44,7 +38,7 @@ background-repeat: no-repeat;
 }
 
 .bk-black{
-  background-color: black;
+  background: rgba(0, 0, 0, 0.8); 
   margin: 15px;
 }
 
@@ -55,4 +49,25 @@ background-repeat: no-repeat;
 .boton {
   color: blue;
   background-color: yellow;
+}
+
+.w-letters{
+  color: white;
+}
+
+.centrar{
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+body {
+  background-image: url('./Componentes/imagenes/04_Bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.boton-delete{
+  margin-right: 5px;
 }

@@ -70,7 +70,7 @@ const Form = () => {
           <h1 className="w-letters">
             Order ID:
           </h1>
-          <h2>{orderId}</h2>
+          <h2  className="w-letters">{orderId}</h2>
        
         <button onClick={handleOrder}>
           Copy ID

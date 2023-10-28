@@ -15,19 +15,22 @@ const ItemDetail = ({products}) => {
   return (
     <>
       {product.map((producto) => (
-        <><div key={producto.id}>
-          <div>
+        <>
+        <div className='bk-black'>
+        <div key={producto.id}>
+          <div  >
             <img
               src={producto.imagen}
               alt={producto.nombre}
-              style={{ borderRadius: 'lg', width: '60%', height: '40%' }} />
+              className='img-detail' />
           </div>
-          <h2>{producto.nombre}</h2>
-          <p>{producto.detalle}</p>
-          <p>Categoria: {producto.categoria}</p>
-          <p>Stock: {producto.cantidad}</p>
-          <p>Precio: $ {producto.precio}</p>
-        </div><ItemCount cantidad={producto.cantidad} />
+          <h2  className='letters'>{producto.nombre}</h2>
+          <p  className='letters'>{producto.detalle}</p>
+          <p className='letters'>Categoria: {producto.categoria}</p>
+          <p  className='letters'>Stock: {producto.cantidad}</p>
+          <p  className='letters'>Precio: $ {producto.precio}</p>
+        </div><ItemCount nombre={producto.nombre} precio={producto.precio} cantidad={producto.cantidad} id={producto.id} />
+        </div>
         </>
 
       ))}

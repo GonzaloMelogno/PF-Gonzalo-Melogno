@@ -1,10 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "react-bootstrap";
+import { CartContext } from "../context/ShoppingCartContext";
 
 
-const ItemCount = ({ cantidad}) => {
+const ItemCount = ({ cantidad, id, precio, nombre }) => {
+  const { cart, setCart } = useContext(CartContext);
   const [count, setCount] = useState(1);
+
 
   const addItem = () => {
     if (count < cantidad) {
@@ -17,6 +20,20 @@ const ItemCount = ({ cantidad}) => {
       setCount(count - 1);
     }
   };
+ 
+  const sendToCart = () => {
+    setCart((currentItems) => {
+      const existingItemIndex = currentItems.findIndex((item) => item.id === id);
+      if (existingItemIndex !== -1) {
+        const updatedItems = [...currentItems];
+        updatedItems[existingItemIndex].cantidad += count;
+        console.log(currentItems)
+        return updatedItems;
+      } else {
+        return [...currentItems, {id, nombre, precio, cantidad: count}];
+      }
+    });
+  };
 
   return (
     <>
@@ -24,7 +41,7 @@ const ItemCount = ({ cantidad}) => {
         <Button variant="danger" onClick={substractItem}>
           -
         </Button>
-        <span className="m-2" style={{ fontSize: '1.5rem' }}>
+        <span className="m-2 letters" style={{ fontSize: '1.5rem' }}>
           {count}
         </span>
         <Button variant="success" onClick={addItem}>
@@ -32,9 +49,9 @@ const ItemCount = ({ cantidad}) => {
         </Button>
         <hr />
         {cantidad > 0 ? (
-          <Button variant="primary">
-            Add to Cart
-          </Button>
+          <button className="boton" variant="primary" onClick={sendToCart}>
+            Agregar al carro
+          </button>
         ) : (
           <p className="text-muted">Out of stock</p>
         )}

@@ -1,8 +1,8 @@
 import React from "react";
 import {Nav, Navbar, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ItemListContainer from "../Productos/ItemListContainer";
-import Cart from "./Cart";
+import CartWidget from "./CartWidget";
+
 
     function NavBar() {
       return (
@@ -17,8 +17,9 @@ import Cart from "./Cart";
               <Link to={`/categoria/${"cocina"}`}> <div className="navegacion">Cocina</div></Link>
               </Nav>
             </Container>
-            <Link to={`/cart`}>  <span class="material-symbols-outlined"> shopping_cart </span> 
-            </Link> 
+            <Link to={"/cart"}>
+              <CartWidget  /> 
+            </Link>
           </Navbar>
         </>
       );

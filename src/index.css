@@ -29,3 +29,30 @@ background-repeat: no-repeat;
   color: white;
   size: 40px;
 }
+
+.img-home{
+  width: 15%;
+  height: auto;
+}
+
+.img-detail{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 40%;
+  height: auto;
+}
+
+.bk-black{
+  background-color: black;
+  margin: 15px;
+}
+
+.letters{
+  color: greenyellow;
+}
+
+.boton {
+  color: blue;
+  background-color: yellow;
+}

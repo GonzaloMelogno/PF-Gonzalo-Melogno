@@ -2,7 +2,7 @@ import React from "react";
 import ItemDetail from "./ItemDetail";
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from "react";
-import DbProductos from "./DbProductos";
+import { collection, getDocs, getFirestore } from "firebase/firestore"
 
 
 const ItemDetailContainer = () => {
@@ -11,13 +11,19 @@ const ItemDetailContainer = () => {
  
 
   useEffect(()=>{
-    const products = DbProductos
-    setProducts(products);
-
+    const db = getFirestore();
+    const dbtraida = collection(db, "Productos");
+    getDocs(dbtraida).then((querySnapshot)=>{
+      const products = querySnapshot.docs.map((doc)=>({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setProducts(products);
+    });
  
   }, [])
 
-  const catFilter = products.filter((product) => product.id === parseInt(id));
+  const catFilter = products.filter((product) => product.id === id);
  
   return (
     <>{products.length > 0 ? (id ? <ItemDetail products={catFilter} /> : <ItemDetail products={products} />) : <>Cargando...</>}

@@ -1,20 +1,26 @@
 import React from "react";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
-import DbProductos from "./DbProductos";
 import { useState, useEffect } from "react";
+import { collection, getDocs, getFirestore } from "firebase/firestore"
 
 
 
 
 function ItemListContainer() {
+   
   const {categoria} = useParams();
   const [products, setProducts] = useState([]);
   useEffect(()=>{
-    const products = DbProductos
-    setProducts(products);
-
- 
+    const db = getFirestore();
+    const dbtraida = collection(db, "Productos");
+    getDocs(dbtraida).then((querySnapshot)=>{
+      const products = querySnapshot.docs.map((doc)=>({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setProducts(products);
+    });
   }, [])
 
   

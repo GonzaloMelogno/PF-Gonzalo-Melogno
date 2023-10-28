@@ -10,36 +10,40 @@ const Cart = () => {
 
   useEffect(() => {
     let newTotal = 0;
-    cart.forEach((item) => {if (total === 0){
-      newTotal += item.precio * item.cantidad;
-    }
-    else{
-      newTotal = total + (item.precio * item.cantidad);
-    }
-    }); 
+    cart.forEach((item) => {
+       newTotal += item.precio * item.cantidad;
+    });
     setTotal(newTotal);
-  }, [cart]);
+   }, [cart]);
 
+   const handleItemDeletion = (itemDeleted) => {
+    setTotal(total - (itemDeleted.precio * itemDeleted.cantidad));
+   };
+   
+   const handleDelete = (id) => {
+    const updatedCart = cart.map((item) => {
+       if (item.id === id) {
+         if (item.cantidad > 1) {
+           return { ...item, cantidad: item.cantidad - 1 };
+         } else {
+           handleItemDeletion(item);
+           return null;
+         }
+       } else {
+         return item;
+       }
+    });
+   
+    setCart(updatedCart.filter(item => item !== null));
+   };
+   
    const handleDeleteAll = (id) => {
-     const newCart = cart.filter((item) => item.id !== id);
+    const itemsToDelete = cart.filter((item) => item.id === id);
+    itemsToDelete.forEach(item => handleItemDeletion(item));
+   
+    const newCart = cart.filter((item) => item.id !== id);
     setCart(newCart);
    };
-  const handleDelete = (id) => {
-    const updatedCart = cart.map((item) => {
-      if (item.id === id) {
-        if (item.cantidad > 1) {
-          return { ...item, cantidad: item.cantidad - 1 };
-        } else {
-          return null;
-        }
-      } else {
-        return item;
-      }
-    });
-    const newCart = updatedCart.filter((item) => item !== null);
-  
-    setCart(newCart);
-  };
   
 
   const condition = () => {
